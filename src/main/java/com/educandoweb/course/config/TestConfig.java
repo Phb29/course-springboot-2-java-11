@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.educandoweb.course.entities.Category;
+import com.educandoweb.course.entities.Ordemitem;
 import com.educandoweb.course.entities.Order;
 import com.educandoweb.course.entities.Product;
 import com.educandoweb.course.entities.User;
 import com.educandoweb.course.entities.enums.OrderStatus;
 import com.educandoweb.course.repositories.CategoryRepository;
+import com.educandoweb.course.repositories.OrdemitemRepository;
 import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.ProductRepository;
 import com.educandoweb.course.repositories.UserRepository;
@@ -34,6 +36,9 @@ public class TestConfig implements CommandLineRunner {
    
    @Autowired
    private ProductRepository productRepository;
+   
+   @Autowired
+   private OrdemitemRepository ordemitemRepository;
 
 @Override
 public void run(String... args) throws Exception {
@@ -74,5 +79,11 @@ public void run(String... args) throws Exception {
 	userRepository.saveAll(Arrays.asList(u1,u2));
 	orderRepository.saveAll(Arrays.asList(o1,o2,o3));
 	
+	Ordemitem oi1 = new Ordemitem(o1, p1, 2, p1.getPrice());
+	Ordemitem oi2 = new Ordemitem(o1, p3, 1, p3.getPrice());
+	Ordemitem oi3 = new Ordemitem(o2, p3, 2, p3.getPrice());
+	Ordemitem oi4 = new Ordemitem(o3, p5, 2, p5.getPrice());
+	
+	ordemitemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 }
 }
